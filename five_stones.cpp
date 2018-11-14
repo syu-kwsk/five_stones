@@ -25,7 +25,7 @@ void make_gobann(){ for (i = 0; i < NUMBER; i++){
 }
 int main(){
     
-  make_gobann();
+  make_gobann();//made gobann
  
  
   return 0;
