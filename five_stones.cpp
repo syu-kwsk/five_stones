@@ -4,48 +4,22 @@
 int masume[NUMBER][NUMBER];
 int tate;
 int yoko;
-int i, j, k;
-int x = 0;
-int y = 0;
-int O; //white_stone
-int X; //black_stone
-
+int i, j, k, l, m;
+int x1 = 0, x2 = 0;
+int y1 = 0, y2 = 0;
+enum{
+  O, X, B
+};
 void make_gobann(){
-
-  /*for (i = 0; i < NUMBER; i++){
-    printf(" %2d", i + 1);
-  }
   
-  puts("\n  ---------------------------");
-  */
   for (tate = 0;tate < NUMBER; tate++){
-    /*printf("%d|", tate + 1);*/
     for(yoko = 0; yoko < NUMBER; yoko++){
-      masume[yoko][tate]  =  64;
-      if  (masume[yoko][tate] == 64){
-        /* printf("   ");*/
-      }
+      masume[tate][yoko]  =  B;
     }
-    /* putchar('\n');*/
   } //made gobann
 }
-int main(){
-  /*初期化*/
-  make_gobann();
-  
-  
-  /*入力*/
 
-  puts("decide your stone's position! \n");
-  printf("x:");scanf("%d", &j);
-  printf("y:");scanf("%d", &k);
-  x = j - 1;
-  y = k - 1;
-  masume[y][x] = O;
-
-  
-  /*出力*/
-  puts(" ");
+void result(){
   for (i = 0; i < NUMBER; i++){
     printf("%3d", i + 1);
   }
@@ -54,20 +28,52 @@ int main(){
   for (tate = 0;tate < NUMBER; tate++){
     printf("%d|", tate + 1);
     for(yoko = 0; yoko < NUMBER; yoko++){
-      if  (masume[tate][yoko] == masume[y][x]){
+
+      if  (masume[tate][yoko] == O){
         printf("O  ");
       }
-      else if (masume[tate][yoko] == 64){
-        printf("B  ");
+      else if (masume[tate][yoko] == X){
+        printf("X  ");
       }
-          
+      else if (masume[tate][yoko] == B){
+        printf("+  ");
+      }      
     }
-  
-  putchar('\n');
-
+    putchar('\n');
   }
+}
+
+void ply1(){
+  puts("Player1! Decide stone's position! \n");
+  printf("x1:");scanf("%d", &j);
+  printf("y1:");scanf("%d", &k);
+  x1 = j - 1;
+  y1 = k - 1;
+  masume[y1][x1] = O;
+}
+
+void ply2(){
+  puts("Player2! Decide stone's position! \n");
+  printf("x2:");scanf("%d", &l);
+  printf("y2:");scanf("%d", &m);
+  x2 = l - 1;
+  y2 = m - 1;
+  masume[y2][x2] = X;
+}
+int main(){
+  make_gobann();  /*初期化*/
   
-return 0;
+  while(1){
+    ply1();      /*入力*/
+
+    result();    /*出力*/
+    
+    ply2();      /*入力*/
+  
+    result();    /*出力*/
+    
+  }
+  return 0;
 } 
   
     
