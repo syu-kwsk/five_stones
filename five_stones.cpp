@@ -52,13 +52,101 @@ void ply2(){
   }
 }
 
+void deal(){
+  /*縦判定*/
+  for (yoko = 0; yoko < NUMBER; yoko++){
+    for (tate = 0; tate < NUMBER; tate++){
+      if(masume[tate][yoko] ==     O &&
+         masume[tate + 1][yoko] == O &&
+         masume[tate + 2][yoko] == O &&
+         masume[tate + 3][yoko] == O &&
+         masume[tate + 4][yoko] == O ){
+        p = 1;
+        break;
+      }
+      else if(masume[tate][yoko] ==  X &&
+              masume[tate + 1][yoko] == X &&
+              masume[tate + 2][yoko] == X &&
+              masume[tate + 3][yoko] == X &&
+              masume[tate + 4][yoko] == X ){
+        p = 2;
+        break;
+      }
+    }
+  }
+ 
+  /*横判定*/
+  for (tate = 0; tate < NUMBER; tate++){
+    for (yoko = 0; yoko < NUMBER; yoko++){
+      if (masume[tate][yoko] ==     O &&
+          masume[tate][yoko + 1] == O &&
+          masume[tate][yoko + 2] == O &&
+          masume[tate][yoko + 3] == O &&
+          masume[tate][yoko + 4] == O ){
+        p = 1;
+        break;
+      }
+      else if(masume[tate][yoko] ==     X &&
+              masume[tate + 1][yoko] == X &&
+              masume[tate + 2][yoko] == X &&
+              masume[tate + 3][yoko] == X &&
+              masume[tate + 4][yoko] == X ){
+        p = 2;
+        break;
+      }
+    }
+  }
+
+  /*斜右下判定*/
+  for (tate = 0; tate < NUMBER; tate++){
+    if (masume[tate][tate]  ==        O &&
+        masume[tate + 1][tate + 1] == O &&
+        masume[tate + 2][tate + 2] == O &&
+        masume[tate + 3][tate + 3] == O &&
+        masume[tate + 4][tate + 4] == O ){
+      p = 1;
+      break;
+    }
+    else if (masume[tate][tate]  ==        X &&
+             masume[tate + 1][tate + 1] == X &&
+             masume[tate + 2][tate + 2] == X &&
+             masume[tate + 3][tate + 3] == X &&
+             masume[tate + 4][tate + 4] == X ){
+      p = 2;
+      break;
+    }
+  }
+
+  
+  /*斜右上判定*/
+  for (tate = 0; tate < NUMBER; tate++){
+    for (yoko = 0; yoko < NUMBER; yoko++){
+      if (masume[tate][yoko]  ==        O &&
+          masume[tate + 1][yoko - 1] == O &&
+          masume[tate + 2][yoko - 2] == O &&
+          masume[tate + 3][yoko - 3] == O &&
+          masume[tate + 4][yoko - 4] == O ){
+        p = 1;
+        break;
+      }
+      else if (masume[tate][yoko]  ==        X &&
+               masume[tate + 1][yoko - 1] == X &&
+               masume[tate + 2][yoko - 2] == X &&
+               masume[tate + 3][yoko - 3] == X &&
+               masume[tate + 4][yoko - 4] == X ){
+        p = 2;
+        break;
+      }
+    }
+  }  
+}
 
 void result(){
  
   for (i = 0; i < NUMBER; i++){
     printf("%3d", i + 1);
   }
-  puts("\n --------------------------");
+  puts("\n ------------------------");
 
   for (tate = 0;tate < NUMBER; tate++){
     printf("%d|", tate + 1);
@@ -78,68 +166,12 @@ void result(){
   }
   putchar('\n');
 
-  if (p == 1){
-    puts("\x1b[33mplayer1 win!\x1b[m\n");
-  }
-  else if (p == 2){
-    puts("\x1b[33mplayer2 win!\x1b[m\n");
-  }
-}
-
-
-void deal(){
-  /*Oの縦判定*/
-  for (yoko = 0; yoko < NUMBER; yoko++){
-    for (tate = 0; tate < NUMBER; tate++){
-      if(masume[tate][yoko] ==     O &&
-         masume[tate + 1][yoko] == O &&
-         masume[tate + 2][yoko] == O &&
-         masume[tate + 3][yoko] == O &&
-         masume[tate + 4][yoko] == O ){
-        p = 1;
-        break;
-      }
-    }
-  }
-  /*Xの縦判定*/
-  for (yoko = 0; yoko < NUMBER; yoko++){
-    for (tate = 0; tate < NUMBER; tate++){
-      if(masume[tate][yoko] ==     X &&
-         masume[tate + 1][yoko] == X &&
-         masume[tate + 2][yoko] == X &&
-         masume[tate + 3][yoko] == X &&
-         masume[tate + 4][yoko] == X ){
-        p = 2;
-        break;
-      }
-    }
-  }
-  /*Oの横判定*/
-  for (tate = 0; tate < NUMBER; tate++){
-    for (yoko = 0; yoko < NUMBER; yoko++){
-      if(masume[tate][yoko] ==     O &&
-         masume[tate][yoko + 1] == O &&
-         masume[tate][yoko + 2] == O &&
-         masume[tate][yoko + 3] == O &&
-         masume[tate][yoko + 4] == O ){
-        p = 1;
-        break;
-      }
-    }
-  }
-  /*Xの横判定*/
-  for (yoko = 0; yoko < NUMBER; yoko++){
-    for (tate = 0; tate < NUMBER; tate++){
-      if(masume[tate][yoko] ==     X &&
-         masume[tate + 1][yoko] == X &&
-         masume[tate + 2][yoko] == X &&
-         masume[tate + 3][yoko] == X &&
-         masume[tate + 4][yoko] == X ){
-        p = 2;
-        break;
-      }
-    }
-  }
+   if (p == 1){
+     puts("\x1b[33mplayer1 win!\x1b[m\n");
+     }
+     else if (p == 2){
+     puts("\x1b[33mplayer2 win!\x1b[m\n");
+     }  
 }
 
 void thanks(){
